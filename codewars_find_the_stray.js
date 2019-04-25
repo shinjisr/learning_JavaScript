@@ -30,3 +30,25 @@ function stray(numbers) {
 // The best practice:
 
 // The most clever solution:
+const stray = nums => nums.reduce((a, b) => a ^ b);
+
+// taian:
+
+function stary(number) {
+  let [a, b, c, ...rest] = numbers
+
+  if(a === b) {
+    return b === c ? findDiff(rest, c) : c
+  } else {
+    return b === c ? a : b
+  }
+
+  function findDiff(list, comprator) {
+    for (let i of list) {
+      if (i !== comprator) {
+        return i
+      }
+    }
+  }
+
+}

@@ -1,6 +1,6 @@
 # JavaScript note
 
-190423 - 12:12
+# 190423 - 12:12
 
 ```js
 let fruits = ["apple", "banana", "orange"];
@@ -22,4 +22,30 @@ let otherLangs = ["Elixir", "Haskell"];
 langs = langs.concat(otherLangs); // 印出相加，不會改變原始資料
 
 console.log(langs); //
+```
+
+# 190425
+
+## callBack()
+
+```js
+function addTwo(i) {return i + 2}
+
+function processNumberThenPlusThree(i, callBack) {
+  let result = callBack(i)
+  result = result + 3
+  return result
+}
+
+let r = processNumberThenPlusThree(10, addTwo)
+
+
+function happy() { console.log('lalala');}
+
+function highOrder(callBack) {
+  console.log('Hello')
+  callBack()
+}
+
+highOrder(happy)
 ```

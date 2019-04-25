@@ -1,4 +1,5 @@
 let ary = [1, 2, 3, 4, 5]
+// turn to [9, 8, 7, 6, 5, 4]
 
 // #1
 count = 0
@@ -16,22 +17,3 @@ ary.push(4)
 // 3. plus 4 into it
 
 console.log(ary)
-
-// 保持資料內容 精簡、重要
-let personT = {
-  name: 'tai',
-  birthday: '0407',
-  weigh: 70,
-  height: 190,
-  gender: 'M'
-}
-
-let classRoom = {
-  name: '3-B',
-  teacher: personT,
-  student: [
-    {name: 'bob', birthday: '0503'},
-    {name: 'alice', birthday: '0503'},
-    {name: 'john', birthday: '0503'},
-  ]
-}
