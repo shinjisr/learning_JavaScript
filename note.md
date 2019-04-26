@@ -49,3 +49,55 @@ function highOrder(callBack) {
 
 highOrder(happy)
 ```
+
+## IIFE
+Immediately Invoked Function Expression
+```js
+let z = (function(x) {
+  let i = 100
+  let y = 3000
+  return i = i + y + z
+})(10000)
+
+console.log(z)
+```
+
+### 包覆節點
+
+```js
+$(target).wrap('<div class="foo"></div>')
+$(target).wrap('div.foo')
+
+- 刪除及複製
+
+('目標').remove()
+('目標').detach()
+('目標').empty()
+('目標').clone()
+
+('目標').replace('新節點')
+
+.prop()
+property
+
+.attr()
+取出屬性 attribute
+
+.data()
+取出 html 標籤中 data-.. 屬性的內容
+data-attribute
+```
+
+## 處理表單
+### 事件
+```js
+.change() == 按下 enter, 滑鼠離開表單觸發
+
+.val() == for input 專用
+
+
+.keypress() == 後面兩者
+.keydown()
+.keyup()
+```
+
