@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  background: url(https://www.toptal.com/designers/subtlepatterns/patterns/memphis-mini.png);
+}
+
+h1.title {
+  font-size: 80px;
+  text-align: center;
+}
+.container {
+  margin: 30px auto 0;
+}
+.img-headsup {
+}
+.img-section {
+  height: 600px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  overflow: auto;
+}
+.img-section img {
+  padding: 0;
+  margin: 5px;
+  box-sizing: border-box;
+}
+.describe-section {
+  margin: 10px -5px;
+}
+.form-control {
+  height: 50px;
+}
+#img-url {
+  width: 400px;
+}
+.img-headsup {
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 5px 12px;
+  position: absolute;
+  pointer-events: none;
+  line-height: 3em;
+  transition: all, 0.3s;
+}
+.img-url {
+  /* display: block; */
+  font-size: 1rem;
+  box-sizing: border-box;
+  width: 100px;
+  height: 4em;
+  line-height: 3em;
+}
+.btn {
+  /* line-height: 3em; */
+}
+
+.move-away {
+  font-size: 10px;
+  color: grey;
+  vertical-align: top;
+  top: -10px;
+}
+
+.col-auto {
+  padding-left: 0;
+}
+
+.describe {
+  margin:8px 10px;
+}

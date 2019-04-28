@@ -51,6 +51,7 @@ $(document).ready(function() {
 
   $('#name').on('change', function(evt){
     let t = $(this).val()
+    console.log(t)
     $(this).val(t + "@gmail.com")
   })
 
