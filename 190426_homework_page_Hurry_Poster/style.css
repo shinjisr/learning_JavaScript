@@ -38,7 +38,8 @@ h1.title {
   margin: 10px -5px;
 }
 .form-control {
-  height: 50px;
+  font-size: 18px;
+  height: 60px;
 }
 #img-url {
   width: 400px;
@@ -54,11 +55,11 @@ h1.title {
 }
 .img-url {
   /* display: block; */
-  font-size: 1rem;
+  /* font-size: 26px; */
   box-sizing: border-box;
   width: 100px;
-  height: 4em;
-  line-height: 3em;
+  /* height: 50px; */
+  /* line-height: 3em; */
 }
 .btn {
   /* line-height: 3em; */
@@ -66,9 +67,10 @@ h1.title {
 
 .move-away {
   font-size: 10px;
-  color: #ccc;
+  color: #9e9e9e;
   vertical-align: top;
   top: -10px;
+  transition: all, 0.3s ease-in-out;
 }
 
 .col-auto {
@@ -77,9 +79,4 @@ h1.title {
 
 .describe {
   margin:8px 10px;
-}
-
-.submit-wraper {
-  /* width: 60%; */
-  /* margin-left: 33%; */
 }
