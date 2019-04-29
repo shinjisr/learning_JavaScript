@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="homework_page_190426.js"></script>
     <title>Hurry Poster</title>
-
   </head>
   <body>
     <div class="container justify-content-center">
@@ -20,27 +19,16 @@
       </h1>
         <div class="col">
           <div class="img-section d-flex flex-wrap">
-            <!-- <p>start from here</p> -->
-            <!-- <img class="img-fluid rounded" src="https://picsum.photos/300/200/?random2" alt="圖片說明">
-            <img class="img-fluid rounded" src="https://picsum.photos/300/200/?random3" alt="圖片說明">
-            <img class="img-fluid rounded" src="https://picsum.photos/300/200/?random4" alt="圖片說明"> -->
-            <!-- <div id="img-fluid"><img class="img-fluid rounded" src="https://picsum.photos/300/200/?random1" alt="圖片說明"></div> -->
-            <!-- <img class="img-fluid rounded" src="https://picsum.photos/300/200/?random1" alt="圖片說明">
-            <img class="img-fluid rounded" src="https://picsum.photos/300/200/?random1" alt="圖片說明">
-            <img class="img-fluid rounded" src="https://picsum.photos/300/200/?random1" alt="圖片說明">
-            <img class="img-fluid rounded" src="https://picsum.photos/300/200/?random1" alt="圖片說明">
-            <img class="img-fluid rounded" src="https://picsum.photos/300/200/?random1" alt="圖片說明">
-            <img class="img-fluid rounded" src="https://picsum.photos/300/200/?random1" alt="圖片說明">
-            <img class="img-fluid rounded" src="https://picsum.photos/300/200/?random1" alt="圖片說明">
-            <img class="img-fluid rounded" src="https://picsum.photos/300/200/?random1" alt="圖片說明"> -->
           </div>
           <div class="wraper describe-section">
             <div class="row">
              <div class="col">
-                <p class="describe text-center">Hey, Hurry, I have some image to post!</p>
+                <p class="describe text-center">You can easily remove images by a gentle click on it.</p>
              </div>
             </div>
-            <div class="form-inline submit-section justify-content-center">
+
+            <!-- version 1: doesn't went well...-->
+            <!-- <div class="form-inline submit-section justify-content-center">
               <div class="col-auto">
                 <label class="img-headsup" for="img-url">Paste img url here.</label>
                 <input id="img-url" class="form-control" type="url" autofocus/>
@@ -48,7 +36,18 @@
               <div class="col-auto">
                 <input name="post" class="btn btn-primary form-control" type="submit" value="Post"/>
               </div>
-            </div>
+            </div> -->
+
+            <!-- version 2: form submit method which is better solution.-->
+            <form class="form-inline submit-section justify-content-center">
+              <div class="col-auto">
+                <label class="img-headsup" for="img-url">Paste img url here.</label>
+                <input id="img-url" class="form-control" type="url" autofocus/>
+              </div>
+              <div class="col-auto">
+                <input name="post" for="img-url" class="btn btn-primary form-control" type="submit" value="Post"/>
+              </div>
+            </form>
             <div class="quicky-section">
               <p class="describe text-center">Quick post by click links below:</p>
               <ul class="nav flex-column align-items-center">

@@ -10,9 +10,10 @@ $(document).ready(function(evt) {
         $(this).remove();
       });
   }
-  removeImg();
+  removeImg(); // Call function for default images.
+
+
   // Insert imgs to the first
-  
   $('#img-url').on('change', function(evt){
     console.log('a');
       $('.img-section').prepend(`<img class="img-fluid rounded" src="${$('#img-url').val()}" alt="Oops! Can't find the image.">`);
@@ -20,14 +21,14 @@ $(document).ready(function(evt) {
       removeImg()
     });
     
-  $('.btn').click(function(evt) {
-    console.log('b');
-    console.log($('#img-url').val());
-    let imgHref = $('#img-url').val();
-    $('.img-section').prepend(`<img class="img-fluid rounded" src="${imgHref}" alt="Oops! Can't find the image.">`);
-    $('#img-url').val('');
-    removeImg()
-  });
+  // $('.btn').click(function(evt) {
+  //   console.log('b');
+  //   console.log($('#img-url').val());
+  //   let imgHref = $('#img-url').val();
+  //   $('.img-section').prepend(`<img class="img-fluid rounded" src="${imgHref}" alt="Oops! Can't find the image.">`);
+  //   $('#img-url').val('');
+  //   removeImg()
+  // });
 
 
   // 快速加入圖片
