@@ -1,0 +1,146 @@
+<html>
+      <head>
+        <meta charset="UTF-8">
+        <title>note.md</title>
+      </head>
+      <body>
+        <h1 id="javascript-note">JavaScript note</h1>
+<h1 id="190423-12-12">190423 - 12:12</h1>
+<pre><code class="lang-js">let fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;orange&quot;];
+fruits.length
+
+fruits.push(&quot;pear&quot;) // 在最後面加一個元素
+fruits.pop() // 把最後一個元素丟出來
+fruits.unshift(&quot;grape&quot;) // 在最前面加入一個元素
+fruits.shift() // 丟出最前面的元素
+fruits.join() // 將陣列轉成字串
+fruits.concat() // 連接陣列 不改變原始資料
+fruits.includes(&quot;lalala&quot;); // 判斷陣列內是否有包含 &#39;lalala&#39;
+</code></pre>
+<pre><code class="lang-js">let langs = [&quot;Ruby&quot;, &quot;Python&quot;, &quot;Java&quot;];
+let otherLangs = [&quot;Elixir&quot;, &quot;Haskell&quot;];
+
+langs = langs.concat(otherLangs); // 印出相加，不會改變原始資料
+
+console.log(langs); //
+</code></pre>
+<h1 id="190425">190425</h1>
+<h2 id="callback-">callBack()</h2>
+<pre><code class="lang-js">function addTwo(i) {return i + 2}
+
+function processNumberThenPlusThree(i, callBack) {
+  let result = callBack(i)
+  result = result + 3
+  return result
+}
+
+let r = processNumberThenPlusThree(10, addTwo)
+
+
+function happy() { console.log(&#39;lalala&#39;);}
+
+function highOrder(callBack) {
+  console.log(&#39;Hello&#39;)
+  callBack()
+}
+
+highOrder(happy)
+</code></pre>
+<h2 id="iife">IIFE</h2>
+<p>Immediately Invoked Function Expression</p>
+<pre><code class="lang-js">let z = (function(x) {
+  let i = 100
+  let y = 3000
+  return i = i + y + z
+})(10000)
+
+console.log(z)
+</code></pre>
+<h3 id="-">包覆節點</h3>
+<pre><code class="lang-js">$(target).wrap(&#39;&lt;div class=&quot;foo&quot;&gt;&lt;/div&gt;&#39;)
+$(target).wrap(&#39;div.foo&#39;)
+
+- 刪除及複製
+
+(&#39;目標&#39;).remove()
+(&#39;目標&#39;).detach()
+(&#39;目標&#39;).empty()
+(&#39;目標&#39;).clone()
+
+(&#39;目標&#39;).replace(&#39;新節點&#39;)
+
+.prop()
+property
+
+.attr()
+取出屬性 attribute
+
+.data()
+取出 html 標籤中 data-.. 屬性的內容
+data-attribute
+</code></pre>
+<h2 id="-">處理表單</h2>
+<h3 id="-">事件</h3>
+<pre><code class="lang-js">.change() == 按下 enter, 滑鼠離開表單觸發
+
+.val() == for input 專用
+
+
+.keypress() == 後面兩者
+.keydown()
+.keyup()
+</code></pre>
+<h1 id="190430">190430</h1>
+<pre><code class="lang-js">let person = {
+  first_name: &quot;t&quot;,
+  last_name: &quot;s&quot;,
+  height: 176,
+  weight: 70,
+  greetingTo: function(name) {},
+  full_name: function() {
+    return this.first_name + &#39; &#39; + this.last_name}
+  }
+  // method short hand
+  full_name() {}
+}
+
+console.log(person.greetingTo)
+
+
+person.greetingTo
+
+let r = person.full_name
+
+console.log(r)
+
+</code></pre>
+<p>@13:54 DOM event level 2</p>
+<ul>
+<li>事件冒泡的逆襲：</li>
+<li>阻止元素預設的行為：preventDefault()</li>
+<li><p>阻止事件冒泡機制：stopPropagation()
+或是 (例如 google drive 拖曳檔案）@14:15
+在 event handler 裡 return false</p>
+</li>
+<li><p>在還不存在的元素上綁定事件：[, selector]
+在動態生成的頁面中，可以把事件綁在物件的靜態父層：</p>
+</li>
+</ul>
+<pre><code class="lang-js">$(父元素).on(&#39;click&#39;, 子元素, function(evt) {
+  // do something
+});
+
+
+$(&#39;#imgDiv&#39;).on(&#39;click&#39;, &#39;img.pic&#39;, function(){})
+</code></pre>
+<ul>
+<li>可不可以不要用 jQuery?<pre><code class="lang-js">let elem = document.querySelector(&#39;#some_id&#39;)
+elem.addEventListener(&#39;click&#39;, function(event) {
+// do something
+})
+</code></pre>
+參考：<a href="http://youmightnotneedjquery.com">YOU MIGHT NOT NEED JQUERY</a></li>
+</ul>
+
+      </body>
+    </html>

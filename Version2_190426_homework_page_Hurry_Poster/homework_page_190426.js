@@ -1,15 +1,9 @@
 $(document).ready(function(evt) {
   // 移除上傳的圖片
-  function removeImg(){
+  function removeImg() {
     console.log('!!');
-      $('.img-fluid').click(function(evt) {
-      // $('.img-fluid').bind("click", function(evt) {
-        console.log($(this));
-        // alert(1);
-        // $('#img-fluid').fadeOut("slow");
-        $(this).remove();
-      });
-  }
+      
+  };
   removeImg(); // Call function for default images.
 
 
@@ -19,7 +13,18 @@ $(document).ready(function(evt) {
       $('.img-section').prepend(`<img class="img-fluid rounded" src="${$('#img-url').val()}" alt="Oops! Can't find the image.">`);
       $(this).val('');
       removeImg()
-    });
+  });
+
+  $('.img-section').click('.img-fluid', function(evt) {
+    // $('.img-fluid').bind("click", function(evt) {
+      console.log(evt.target);
+      $(evt.target).fadeOut("slow")
+      // alert(1);
+      // $('#img-fluid').fadeOut("slow");
+      // $(this).fadeOut();
+      // $(this).hide("slow");
+      // $(this).remove();
+   });
     
   // $('.btn').click(function(evt) {
   //   console.log('b');

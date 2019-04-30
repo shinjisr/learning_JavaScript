@@ -101,3 +101,58 @@ data-attribute
 .keyup()
 ```
 
+# 190430
+
+```js
+let person = {
+  first_name: "t",
+  last_name: "s",
+  height: 176,
+  weight: 70,
+  greetingTo: function(name) {},
+  full_name: function() {
+    return this.first_name + ' ' + this.last_name}
+  }
+  // method short hand
+  full_name() {}
+}
+
+console.log(person.greetingTo)
+
+
+person.greetingTo
+
+let r = person.full_name
+
+console.log(r)
+
+```
+
+@13:54 DOM event level 2
+- 事件冒泡的逆襲：
+1. 阻止元素預設的行為：preventDefault()
+2. 阻止事件冒泡機制：stopPropagation()
+或是 (例如 google drive 拖曳檔案）@14:15
+在 event handler 裡 return false
+
+- 在還不存在的元素上綁定事件：[, selector]
+在動態生成的頁面中，可以把事件綁在物件的靜態父層：
+
+```js
+$(父元素).on('click', 子元素, function(evt) {
+  // do something
+});
+
+
+$('#imgDiv').on('click', 'img.pic', function(){})
+```
+
+- 可不可以不要用 jQuery?
+```js
+let elem = document.querySelector('#some_id')
+elem.addEventListener('click', function(event) {
+  // do something
+})
+```
+參考：[YOU MIGHT NOT NEED JQUERY](http://youmightnotneedjquery.com)
+

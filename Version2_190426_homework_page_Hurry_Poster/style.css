@@ -50,7 +50,6 @@ h1.title {
   padding: 5px 12px;
   position: absolute;
   pointer-events: none;
-  line-height: 3em;
   transition: all, 0.3s;
 }
 .img-url {
@@ -61,6 +60,13 @@ h1.title {
   /* height: 50px; */
   /* line-height: 3em; */
 }
+.bt-line {
+  width: 95%;
+  margin: auto;
+  position: relative;
+  top: -12px;
+  border-bottom: 1px solid dodgerblue;
+}
 .btn {
   /* line-height: 3em; */
 }
@@ -69,7 +75,7 @@ h1.title {
   font-size: 10px;
   color: #9e9e9e;
   vertical-align: top;
-  top: -10px;
+  top: -6px;
   transition: all, 0.3s ease-in-out;
 }
 
