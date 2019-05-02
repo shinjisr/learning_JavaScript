@@ -37,7 +37,7 @@
       // }
 
 function primeString(s) {
-
+  // 將字串重複的部份切成一個規律的陣列
   let spArr = s.split(s[0]);
   spArr.shift();
 
