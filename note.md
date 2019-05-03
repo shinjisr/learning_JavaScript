@@ -129,7 +129,9 @@ console.log(r)
 ```
 
 @13:54 DOM event level 2
+
 - 事件冒泡的逆襲：
+
 1. 阻止元素預設的行為：preventDefault()
 2. 阻止事件冒泡機制：stopPropagation()
 或是 (例如 google drive 拖曳檔案）@14:15
@@ -148,11 +150,30 @@ $('#imgDiv').on('click', 'img.pic', function(){})
 ```
 
 - 可不可以不要用 jQuery?
+
 ```js
 let elem = document.querySelector('#some_id')
 elem.addEventListener('click', function(event) {
   // do something
 })
 ```
+
 參考：[YOU MIGHT NOT NEED JQUERY](http://youmightnotneedjquery.com)
 
+# 190503 websocket
+
+@10:50 關於表單填寫和使用者體驗
+
+debounce: 使用者輸入停下後才進行下一步動作
+actioncable: rails 用來處理 websocket 的輕量級套件
+
+適用 rails 的雲端伺服器：
+
+- Linode: 便宜划算的選擇、在東京有機房
+- DigitalOcean: 在新加坡有機房，比較貴。
+- Vultr: 最便宜的方案只提供 IPv6
+
+@13:54 API 說明
+@16:15 重新介紹 for 迴圈
+
+## 作業：挑一個喜歡的 API 來打

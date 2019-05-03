@@ -1,0 +1,14 @@
+body {
+  background-color: #000;
+}
+.container {
+  margin: auto;
+}
+.card {
+  /* height: 380px; */
+  margin-bottom: 10px;
+}
+
+.d-hide {
+  display: none;
+}
