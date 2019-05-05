@@ -13,7 +13,6 @@
 // The most clever solution:
 
 function accum(s) {
-	console.log("TCL: accum -> s.split('').map((x, i) => (x.toUpperCase() + x.toLowerCase().repeat(i))).join('-')", s.split('').map((x, i) => (x.toUpperCase() + x.toLowerCase().repeat(i))).join('-'))
   return s.split('').map((x, i) => (x.toUpperCase() + x.toLowerCase().repeat(i))).join('-');
 }
 

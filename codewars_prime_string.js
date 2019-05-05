@@ -52,20 +52,16 @@ function primeString(s) {
     // 如果重複次數小於等於
     (tCounter[spArr[0]] <= 1) || (tCounter[spArr[0]] !== tCounter[e]) ? falseCount += 1: e;
   };
-  
   // 將不重複計數器 falseCount 的值轉為布林值輸出
   return !!falseCount; 
 }
-
-
-
+console.log()
 console.log(primeString("asdf")); // should be true
 console.log(primeString("abac")); // should be true
 console.log(primeString("qiuefgqiuefgqiuefg")); // should be false
 console.log(primeString("zkvjhuj")); // should be true
 
 // The best practice & The most clever solution:
-
 function primeString(s) {
   return (s + s).indexOf(s, 1) == s.length;
 };
