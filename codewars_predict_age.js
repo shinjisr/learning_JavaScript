@@ -27,7 +27,7 @@ function predictAge(...ages){
 //   return Math.floor(Math.sqrt(arr.map(a => a * a).reduce((b,c) => b + c)) / 2)
 // }
 
-// The most clever answer:
+// * The most clever answer:
 // const predictAge = (...ages) => Math.hypot(...ages) / 2 | 0;
 
 

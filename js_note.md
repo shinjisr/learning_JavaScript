@@ -1,384 +1,350 @@
-# 190507
+# 190509
 
-## @11:10 Regular expression 正規表達式
+@10:40學程式最難的事
 
-直接比對（一個字一個字比對）
-`"abced".match(/abc/)` // true
-`"abcde".match(/1/)` // true
+## 推薦書單
 
-```js
-let r = "abcde".match(/abc/)
-console.log(r) // ["abc"]
+- [一個人的獲利模式：用這張圖，探索你未來要走的路](https://www.books.com.tw/products/0010756794)
+- [刻意練習](https://www.books.com.tw/products/0010752714)
+- [Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones](https://www.books.com.tw/products/F014268227)
 
-/abcde/.exec("abc")     // null
-/abcde/.exec("abcdefg") // ["abcde"]
-```
+## @10:50 JavaScript expression
 
-- 包含
+與 expression 相對的是 statement
 
-```js
-"abce".match(/[a-z]/) // ["a"]
-"Abce".match(/[A-Za-z]/) // ["A"]
-"abce1".match(/[1-9a-z]/) // ["a"] 只抓一個
-```
+- statement 沒有回傳值
 
-- 不包含
+## @10:57 ES6
+
+- Arrow function tip: 如果想要回傳物件
 
 ```js
-"abcde".match(/[^a-d]/) // ["e"]
-"Abce1234".match(/[^A-Za-z]/) // ["1"]
-"abce1".match(/[^1-9a-z]/) // null
+let foo = (a) => { return {a: a, b: 10}}
+
+// 解法
+let foo = (a) => ({a: a, b: 10})
 ```
 
-類型
+## 解構賦值
+
+等號的右邊接的是陣列或物件的時候，大約就是在做解構賦值。
+效能會比較好。
 
 ```js
-"abcde".match(/\w/) // 所有字加底線，等同於 [A-Za-z0-9_]
-"abcde".match(/\W/) // 所有不屬於 [A-Za-z0-9_] // null
-"1abcde".match(/\d/) // 等同於 [0-9]
-"1abcde".match(/\D/) // 所有不屬於 [0-9]
+p = ["bob", 18, "male"]
+let [name, age, gender] = p
 
-\s // 空白
-\t // tab
-\n // 換行
-\r // 換行
+// ! 不一定要全部取出
+let [name] = p
+
+var person = {name: "ashley", age: 19, gender: "F"}
+let {gender: gender, name: name, age: age} = person
+
+// ！ 如果 key 和變數的名稱相同，可以省略 key:
+let {gender, name, age} = person
+
+//也不一定要全部取出
+let {gender, name} = person
+
+cnosole.log(name)
 ```
 
-- 任一種
-`"bar.js".match(/js/)` // 比對 "js"
-`"bar.js".match(/rb|js/)` // 比對 "rb" 或者 "js"
-
-- 條件(修飾前面一個字)
+## @11:29 解構賦值特技
 
 ```js
-"abde".match(/abc?de/) // ["abde"], 零個或一個 c
-"abde".match(/abc+de/) // null, 一個以上的 c (abccccde)
-"abccccccde".match(/abc*de/) // ["abccccccde"] 零個或多個 c
+var person = {name: "ashley", age: 19, gender: "F"}
+
+var isAdult = function(person) {
+  // var {age} = person
+  return person.age > 18
+}
+// refactor with destructure assignment
+var isAdult = function({age}) {
+  age > 18
+}
+
+let r = isAdult(person)
+console.log(r) // true
+
+// ! 可以寫出這樣漂亮的程式
+var isAdult2 = ({age}) => age > 18
+let n = isAdult2(person)
+console.log(n)
+
+var greeting = ({name}) => `Hello, ${name}`
+let h = greeting(person)
+console.log(h)
 ```
 
-重複次數
+## "..." 具有『拆開』和『組裝』的含義
 
 ```js
-"aaabc".match(/aaa/) // ["aaa"]
-"aaabc".match(/a{3}/) // a 重複正好 3 次 ["aaa"]
-"aaabc".match(/\w{3,5}/) // ["aaabc"]3~5 英字、數字、"_"
-"aaaaaaaabc".match(/\w{3,}/) // ["aaaaaaaabc"] 找 3 個以上～
-"A12sakef345".match(/[A-Z]\d\d\d\d\d)
+// 拆掉空值：
+console.log([...[1, 2, 3], ...[], [4, 5, 6]])
+// [1, 2, 3, 4, 5, 6]
 
-let goodGuy = /[A-Z]\d{9}/.exec("A123456789")
+// 接受不定參數
+function foo(name, age, ...options) {
+  console.log(name)
+  console.log(options)
+}
 
-console.log(goodGuy) // ["A123456789"]
+foo(7, 8, 9, 0, 1)
 
-let regex = /[A-Z]\d{9}/
-
-var goodGuy = "A123456789".match(regex) // ["A123456789"]
+let [head, ...tails] = ['x', 'y', 'z', 'omgbbq']
+console.log(head) // "y"
+console.log(tails) // ["z", "omgbbq"]
 ```
 
-- 任何東西： "."
-
-`"@-_%las".match(/....las/) // ["@-_%las"`
-
-- 脱逸符號： "\"
+## @11:52 live coding 遞迴
 
 ```js
-"foo.js".match("\.js") // [".js"]
-```
+function mult3sum([head, ...tails]) {
+  if (tails.length === 0) { return 0}
+  return foo(tails) + (head * 3)
+}
 
-> Note:[]裡面不需要脱逸
-
-比對副檔名：
-
-```js
-// group
-var picRgx = /(\w+)(\.jpe?g|\.png)/
-// match
-var picRgx1 = /\w+\.jpe?g|\w+\.png/
-
-console.log("bbb.jpg".match(picRgx))
-console.log("ccc.jpeg".match(picRgx))
-console.log("ddd.png".match(picRgx))
-console.log("fff.xls".match(picRgx))
-console.log("aaa.doc".match(picRgx))
-console.log("aaa".match(picRgx))
-```
-
-## @14:00群組
-
-- 群組
-
-比對電話
-
-```js
-let rgx = /(0\d)-?(\d{4})-?(\d{4})/
-let numbers = "02-28825252".match(rgx)
-console.log(numbers) // ["02-28825252", "02", "2882", "5252"]
-let tex = "02-28825252".match(phoneNumber)
-let phoneNumber = /(0\d)(?:[-\s])?(\d{4})(?:[-\s])?(\d{4})/
-console.log(tex)
-
-let [,...aaa] = [1, 2, 3, 4, 5]
-console.log(aaa) // [2, 3, 4, 5]
-```
-
-比對 email
-
-```js
-// 比對 email
-
-// let emailRgx = /\w+\@(\w+)\.\w{2,4}/
-// 括號位置和群組顯示有關
-let emailRgx = /\w+\@((\w{2,}\.)+\w{2,4})/
-
-// 可以的
-
-let a = "aaabb@gmail.com".match(emailRgx);
-console.log(a)
-
-let b = "cc@yahoo.com".match(emailRgx);
-console.log(b)
-let yy = "cc@yahoo.com.tw".match(emailRgx);
-console.log(yy)
-
-// 不行的
-
-let c = "example.com".match(emailRgx);
-console.log(c)
-
-let d = "asdf@.com".match(emailRgx);
-console.log(d)
-```
-
-進階用法：不記憶群組，look ahead，look behind
-
- ```js
- (?:a) // 不記憶群組
- (?=a) // look ahead 加入搜尋的字串『往回找』額外條件，例如往前找不能出現某條件
- (?!a) // look behind
-
- let emailRgx = /\w+\@((?:\w{2,}\.)+\w{2,4})/
-
-// 190507 homework - done
-let emailRgx = /((\w+\.*\+*)*(\w+))@((?:\w{2,}\.)+\w{2,4})/
-
-```
-
-- 有時候事情並不美好...
-
-## 文字邊界：\b
-
-```js
-比對 "oo"
-
-// oo 的前後都下邊界
-let rgx = /\boo\b/
-
-"moon".match(/\boo/) // null
-```
-
-## 冷知識： s.t.e.v.e.n.c.c.h@gmail.com
-
-### 開頭與結尾： `^` 以及 `$`
-
-`"history".match(/his$/) // null`
-`"history".match(/^is/) // null`
-
-- 常用修飾符
-
-g:global：不管幾次 match 都抓出來
-i:不在乎大小寫
-
-也可以把字串轉為 reg
-
-```js
-let rgx1 = new RegExp("oo", 'ig')
-let rgx1 = new RegExp("\\wo", 'ig')
-
-let rgx = /oo/ig
-
-let a = "the Oo design is good, I love OOP".match(rgx)
-
-console.log(a)
-```
-
-- 替換威能
-
-```js
-"oomgbbq".replace(/b+q/, '0000') // 'oomg0000'
-
-let str = "I love Oop design, its oOP, moon"
-let r = str.replace(/\boo/ig, 'OO');
+let r = foo([1, 2, 3, 4, 5])
 console.log(r)
 ```
 
-regular expression應用
+### tail recursion 尾遞迴
+
+最後一行回傳函式時 節省記憶體
 
 ```js
-exec
-match
-test
+// function foo([head, ...tails]) {
+//   // return tails
+//   if (tails.length === 0) { return 0}
+//   return foo(tails) + (head * 3)
+// }
 
-search
-replace
-split
+
+// version 2 偽遞迴
+
+function foo([head, ...tails], accu) {
+  // return tails
+  if (tails.length === 0) { return accu}
+  return foo(tails, accu + head * 3)
+}
+
+
+let r = foo([1, 2, 3, 4, 5], 0)
+console.log(r)
+
+// version 3
+
+function foo(list) {
+  return execFoo(list, 0)
+}
+
+function execFoo(list, accu) {
+  if (list.length === 0) { return accu }
+  let [head, ...tails] = list
+  return execFoo(tails, accu + head * 3)
+}
+
+let n = foo([1, 2, 3, 4, 5])
+console.log(r)
 ```
 
-## @15:52什麼是 this
+## @13:21 函式的預設參數
 
-### ! this 所指涉的對象，係由呼叫的時候去決定，而不是宣告的時候。
+預設參數通常會放在後面，避免出問題
+`function bar(x, y = 3, z = 4) {}`
 
 ```js
-let a = 999
+// 在 bar(100, 0) 會出問題
+// function bar(x, y) {
+//   y = y || 1
+//   return x * y
+// }
+
+// 真的給參數預設值
+function bar(x, y = 1) {
+  return x * y
+}
+
+let r1 = bar(100, 2) // 200
+console.log(r1)
+let r2 = bar(100) // 100
+console.log(r2)
+let r3 = bar(100, 0)
+console.log(r3)
+```
+
+### 模擬參數過少導致函式爆炸：
+
+```js
+function baz(x = argumentError()) {
+  return x * 200
+}
+
+function argumentError() {
+  throw new Error('argument not enouth')
+}
+
+let r = baz()
+console.log(r)
+
+function foo(obj, keys = Object.keys(obj)) {
+  console.log(keys)
+}
+
+foo({a: 1, b: 2, c: 3})
+```
+
+### @13:48 示範
+
+```js
+function checkValues(obj, keys = Object.keys(obj)) {
+ return Object.entries(obj)
+              .filter(([k, v]) => keys.includes(k))
+              .filter(([k, v]) => v === null)
+              .map(([k]) => k)
+}
 
 let obj = {
-  a: 200,
-  foo: function(i) { console.log(this.a + i)}
+  a: 1,
+  b: null,
+  c: null,
+  d: 10
 }
 
-obj.foo(1) // 201
-
-// confus part
-let f = obj.foo
-f(1) // 1000 指涉到運作的背景 scope
-// 等同於
-f.call(this, 1) // 同 f(1)，"this" 指涉到 windows
-
-obj.foo(1) // 201
-// 等於
-f.call(obj, 1) // 201, obj 在這裡指環境變數
-```
-
-- apply and call
-
-f.apply(obj, [2]) // 唯一和 call 不同的地方在接受參數的方法。
-f.call(obj, 2)
-
-### 大寫開頭函式：建構式
-
-- JavaScript 類似 OO 的地方：
-prototype
-
-```js
-// 第一種方法 - 建構式：
-function Car(brand, model) {
-  this.brand = brand
-  this.model = model
-};
-
-
-Car.prototype.drive = function(point) { console.log(point)};
-
-let c = new Car('Toyota', 'RAV4');
-c.drive(1000)
-
-console.log(c.brand)
-```
-
-## ES6 syntax:
-
-```js
-// 來自 ES6 的第二種創建方法語法糖 - 類別：
-// 如果要繼承 React：
-class Car extends React{
-  constructor(brand, model) {
-    this.brand = brand
-    this.model = model
-  }
-
-  drive() {
-    console.log(this.brand)
-    console.log("vrooooom")
-  }
-}
-
-let c = new Car('totyta', 'RAV4')
-c.drive()
-```
-
-- 如何加上函式或共用屬性？
-
-```js
-Car.prototype.drive = function() { console.log("booom!")}
-
-Car.prototype.wheelsCount = 4
-```
-
-- 字串
-
-```js
-'a'.padStart(5, '-=') // '-=-=a'
-'a'.padStart(4, '-=') // '-=-a'
-'a'.padEnd(4, '-=') // 'a-=-'
-
-.trimStart()
-.trimEnd()
-```
-
-@17:13 obj function shorthand
-
-- Arrow function
-
-```js
-let foo = function(a) {
-  return a + 1
-}
-
-// 注意 arrow function 的 this 與一般函式不同
-let foo2 = (a) => { return a + 1}
-
-let foo3 = a => { return a + 1}
-
-let foo4 = a => a + 1
-```
-
-### 範疇論
-### functional programing 三神器
-
-map : 相等
-filter ： 相等或減少
-reduce ： 收斂，最終折疊而成的型別，會變成預設的型別
-
-```js
-let ary2 = [{a: 10}, {a: 20}, {a: 30}]
-let r = ary2.reduce((accu, i) => accu += i.a) // 如果沒加預設值，結果會很奇怪 "[object Object]2030"
-let r = ary2.reduce((accu, i) => accu += i.a, 0) // 60
+let r = checkValues(obj, ["a", "c"])
 console.log(r)
 ```
 
-...zip.etc.
+## 加掛套件功能：
 
-善用三神器：
+從舊到新排列
 
-```js
-let ary = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-let keep2 = i => i % 2 == 0
-let multi3 = i => i * 3
-
-let result =
-    ary.filter(keep2)
-       .map(multi3)
-       .reduce((accu, i) => accu + i, 0)
-console.log(result)
-```
+1. underscore.js
+2. Lodash.js
+3. Ramda
 
 ```js
-// ...[1, 2, 3] => [1, 2, 3]
-
-function myMap(ary, f){
-  // ...accu 可以把第一次運轉收到的 null
-  return ary.reduce((accu, i) => [...accu, f(i)], [])
-}
-
-// TODO
-let r =
-  mayMap([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], i => i * 100)
-console.log(r)
-console.log([...[1, 2, 3], ...[4, 5, 6]])
+var ks = ["a", "b", "c"]
+var vs = [1, 2, 3]
+_.zip(ks, vs) // underscore.js
 ```
 
-```js
-let f = i => [i, i * 2]
-let r = [1, 2, 3].map(f)
-console.log(r) // [[1, 2], [3, 4], [5, 6]]
-let r = [1, 2, 3].flatMap(f) // [1, 2, 3, 4, 5, 6]
-```
+## Futhermore https://es6.ruanyifeng.com/
+
+重要的，章節依照重要性排列：
+1, 8, 9, 23, 10, 11, 16, 21, 3, 5
+
+特定情況下好用的
+13, 22, 20, 12
+
+## @14:48 Befor Babel and Webpack
+
+- CommonJS, node_module and npm
+
+- (動態加載)
+- require & module.exports 互相成對
+
+- (靜態加載)
+- 另一種方法： "import baz from" "export" 沒有 s
+
+### 參考
+
+好的套件大多反映在好的文件：
+
+- Ramda
+- Moment.js
+差不多要變成公規版的時間套件。
+
+## @15:28 package.json
+
+`npm init`
+
+### 待釐清
+
+License:
+
+- ISC
+- GPL
+- LGPL
+
+- npx: 會在 local 找 node module, 如果沒有就會去網路上找。
+
+- 指定啟動檔案
+在 `package.json` "scripts": {}內加入：
+    `"start": "node index.js",`
+    `"dev": "node index.js",`
+
+`npm run start` or `npm run dev`
+
+- 安裝 moment 套件
+- `npm i -s moment`
+此指令會幫忙修改  `package.json` 內容， "-s" 代表由使用者安裝的時候才會下載套件。
+
+- 在主要檔案 `index.js` 內加入
+`const moment = require('moment')`
+再輸入
+`npm run start`
+
+- 指定此套件只在開發階段使用
+`npm i -D jest`
+回到 `package.json` 修改  `"test": "jest",`
+
+- 其他人要用，必須複製整個資料夾
+`npm install momentjs`
+
+- 把它存到 `package.json` 裡
+  `npm install -s react`
+  `npm install -D @babel/core`
+
+- 想在這台電腦上都可以用的話
+  `npm install -g yarn`
+  此指令透過 `yarn` 取代 `npm` 以避免早期 npm 因為沒有 `package-lock.json` 而衍生的問題。
+  - 升級 npm: npm install -g npm
+
+## @16:14 Babel
+
+`npx create_react_app my_react_168`
+
+- babel 翻譯新版 JavaScript 語法為可以使用在各種瀏覽器上相容的 ES5 舊語法，規定翻譯的規則放在`babel.config.js`。
+
+## @16:21 Webpack
+
+四個重點：
+
+### 入口
+
+- "CSS in JS" 相當先進的做法。
+從哪邊開始載入，通常是一張你寫的 `js` 檔案。有些人會把 .cs or .scss 也放進來，是比較 hack 的做法，有可能造成預期之外的結果。
+
+- 此做法可以將指定 特定 CSS 的作用域。
+
+### 輸出
+
+通常是個資料夾，慣例上會用 build/ 或是 dist/，處理好的檔案
+
+### Loaders
+
+用來處理檔案的工具，需要先用 `npm install` 安裝
+
+### Plugins
+
+其他工具，需要先用 `npm install` 安裝
+
+## `npm i -d webpack`
+
+## 如果要在 Rails 專案中使用：
+
+Webpacker (Rails 專用 Gem)
+
+- 需要有 yarn
+- 想要用 webpack 打包的檔案放在 a//javascript/packs
+- 與 Rails 整合的設定檔在 config.webpacker.yml
+- webpack 行為的設定檔在 config/webpack/development.js
+
+Installation:
+
+- `rails new myapp --webpack`
+
+- 舊專案：
+  - Add into Gemfile
+  - `bundle exec rails webpacker:install`
